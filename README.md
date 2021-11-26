@@ -194,15 +194,14 @@
 - 并集选择器
 
   - ```css
-    div,
-    span {
+    div,span {
         color: red;
     }
     
     <div class="abc"></div>
     <span>aaa</span>
     ```
-
+  
 - 伪类选择器
 
   - ```css
@@ -374,15 +373,22 @@
 - *规则:*
 
     - 属于同一个 `BFC` 的两个相邻 `Box` 垂直排列
-
-    - 属于同一个 `BFC` 的两个相邻 `Box` 的 `margin` 会发生重叠
-    
+- 属于同一个 `BFC` 的两个相邻 `Box` 的 `margin` 会发生重叠
     - `BFC` 的区域不会与 `float` 的元素区域重叠
-    
     - 计算 `BFC` 的高度时，浮动子元素也参与计算
-    
     - 文字层不会被浮动层覆盖，环绕于周围
     
+
+#### display:none 和 visibility:hidden的区别
+
+- display:none，
+  - 渲染树不会包括该渲染对象，因此不会在页面中占据位置，也不会绑定监听事件
+  - 是非继承属性，子孙节点消失是由于元素从渲染树消失，更改子孙节点的属性也无法显示。
+  - 修改display属性通常会造成文档的重排(reflow)和重绘(repaint)
+- visibility：hidden，
+  - 元素在页面仍然会占据空间，但是不会响应绑定事件
+  - 继承属性，子节点默认继承了父节点的属性，更改成visibility：visible可以让节点显示
+  - 修改visibility属性只会造成文档的重绘(repaint)
 
 #### **css3新的特性？**
 
@@ -427,12 +433,56 @@
 
 # **JS基础**
 
-1. **说一下闭包？**
+#### JS的数据类型
+
+- js中一共有七种基本数据类型：（考虑ES6）
+  - Undefined、Null、Boolean、Number、String
+  - ES6新增了Symbol，BigInt
+- 一种复杂数据类型：Object
+  - 如 Array、Date 等数据类型都可以理解为 Object 类型的子类
+
+#### null和undefined的区别
+
+- null和undefined都是基本数据类型
+- undefined代表是未定义，一般变量声明了但还没有定义的时候会返回 undefined
+- null表示空对象，主要用于赋值给一些可能会返回对象的变量，作为初始化。
+- typeof  null 会返回 “Object”
+- `null == undefined  => true`
+- `null === undefined  => false`
+
+#### 什么是BOM，DOM
+
+- DOM是值文档对象模型，它是指把文档当作一个对象来对待。DOM 是载入到浏览器中的文档模型，以节点树的形式来表现文档，每个节点代表文档的构成部分
+  - **常用的对象或方法**： document.append(增加一个元素)，document.querySelector(查找一个元素)，document.addEventListener(事件监听)
+- BOM是指浏览器对象模型，它是指将浏览器当作一个对象来对待，这个对象主要定义了与浏览器进行交互的法和接口。
+  - BOM的核心是 window，而 window 对象具有双重角色，它既是通过 js 访问浏览器窗口的一个接口，又是一个 Global（全局）对象。
+  - **常用的对象或方法**： location 对象、navigator 对象、screen 对象 window.alert(),`window.setTimeout()` **setTimeOut是是浏览器实现的方法**
+
+#### == 操作符的强制类型转换规则
+
+- 1. 字符串和数字之间相比较时，将字符串转换成数字之后比较
+  2. 其他类型与Boolean值比较时，先将Boolean值转换成数字，再比较
+  3. null和undefined相比较时，结果为**true**，其他值和他们比较时都为**false**
+  4. 一个操作值为NaN，则全部返回**false**，NaN== NaN ==> **false**
+  5. 当比较两个对象时，比较的是他们的引用是不是指向的是同一个对象
+
+#### 说一下闭包？
+
 - 闭包的实质是因为函数嵌套而形成的作用域链
-  
 - 闭包的定义即：函数 `A` 内部有一个函数 `B`，函数 `B` 可以访问到函数 `A` 中的变量，那么函数 `B` 就是闭包
-  
-2. 
+#### 数据类型转换
+
+- | 数据类型  | 转换为true的值 | 转换为false的值 |
+  | --------- | -------------- | --------------- |
+  | Boolean   | true           | false           |
+  | String    | 非空字符串     | 空字符串        |
+  | Number    | 任何非零数字值 | 0和NaN          |
+  | Object    | 任何对象       | null            |
+  | undefined |                | undefined       |
+
+####  instanceof 的作用
+
+- instanceof 运算符用于判断构造函数的 prototype 属性是否出现在对象的**原型链中**的任何位置
 
 # ES6 基础
 
