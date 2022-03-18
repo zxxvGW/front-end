@@ -1,7 +1,5 @@
 # WEB综合
 
-
-
 #### HTML5的history模式
 
 - history接口时html5新增的。它有六种模式改变URL而不刷新界面
